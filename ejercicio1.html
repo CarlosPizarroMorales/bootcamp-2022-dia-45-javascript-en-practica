@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="./assets/css/style.css">
+  <title>Ejercicio 1</title>
+</head>
+
+<body id="ejercicio1">
+  <div>
+    <div>
+      <h2>Escríbenos !!!</h2>
+      <div class="resultado" style="color:green;font-style: italic"></div>
+      <form id="formulario">
+        <div>
+          <div style="display: flex;flex-direction: column;">
+            <label>Nombre completo</label>
+            <input id="nombre" type="text">
+            <p class="errorNombre" style="color:red;font-style: italic;"></p>
+          </div>
+          <div style="display: flex;flex-direction: column;">
+            <label>Asunto</label>
+            <input id="asunto" type="text">
+            <p class="errorAsunto" style="color:red;font-style: italic;"></p>
+          </div>
+        </div>
+        <div style="display: flex;flex-direction: column;">
+          <label>Mensaje</label>
+          <textarea id="mensaje"></textarea>
+          <p class="errorMensaje" style="color:red;font-style: italic;"></p>
+        </div>
+        <div>
+          <input id="botton" type="submit" value="Envíar mensaje">
+        </div>
+      </form>
+    </div>
+  </div>
+  <script>
+    /****************************************
+    **       SELECTORES y LISTENER         **  
+    ****************************************/
+    
+    const resultado = document.querySelector('.resultado');
+    const errorNombre = document.querySelector('.errorNombre');
+    const errorAsunto = document.querySelector('.errorAsunto');
+    const errorMensaje = document.querySelector('.errorMensaje');
+    const formulario = document.querySelector('#formulario');
+    formulario.addEventListener('submit', validar);
+
+    /****************************************
+    **        FUNCION del LISTENER         **  
+    ****************************************/
+
+    function validar(e) {
+      e.preventDefault();
+
+      // INPUTS
+      const nombreValor = e.target[0].value;
+      const asuntoValor = e.target[1].value;
+      const mensajeValor = e.target[2].value;
+      let validacionFlag = true;
+
+      // LIMPIAR CAMPOS
+      [nombreValor, asuntoValor, mensajeValor].forEach(e => e.value = null); // importante fijarse en actualizar la propiedad correcta de cada elemento
+      [resultado, errorNombre, errorAsunto, errorMensaje].forEach(e => e.innerText = ''); // importante fijarse en actualizar la propiedad correcta de cada elemento
+      // inputs no tienen innerText y parrafos no tienen value
+
+
+      // VALIDA REGEX
+      [[nombreValor, 'nombre', errorNombre], [asuntoValor, 'asunto', errorAsunto], [mensajeValor, 'mensaje', errorMensaje]].forEach(e => validaRegex(e));
+
+      // VALIDA RESULTADO
+      if (validacionFlag) {
+        console.log('Entrando en la validación del flag');
+        errorNombre.innerText = '';
+        errorAsunto.innerText = '';
+        errorMensaje.innerText = '';
+
+        resultado.innerText = `Mensaje enviado con éxito`;
+      } else {
+        return;
+      }
+
+      // FUNCION UTILITARIA PARA VALIDAR REGEX
+      function validaRegex([campoValor, campoString, campoError]) {
+        if (!campoValor) {
+          campoError.innerText = `El ${campoString} es requerido`;
+          validacionFlag = validacionFlag && false; // error muy interesante si no se aplica esta asignación. No depender ni asumir el estado inicial de un valor. Ser explícito siempre.
+        } else if (/^[^ \d][a-zñáéíóú ]+[a-zñáéíóú]+$/i.test(campoValor)) {
+          validacionFlag = validacionFlag && true; // super ultra interesante, solo si el valor de operar el valor anterior mas el actual es true, entonces flag true. Si se asigna directamente basta que el último valor sea true para satisfacer la validacion del flag.
+        } else {
+          campoError.innerText = `El ${campoString} solo puede contener letras y espacios`;
+          validacionFlag = validacionFlag && false;
+        };
+        console.log(`Saliendo de validaRegex() para "${campoString}" con validacionFlag = ${validacionFlag}`);
+      }
+    }
+
+      // para nombre /^[a-z]+[a-z ]+/gi
+      // para el asunto y mensaje /^[a-z]+[a-z .]+/gim
+      // /^[^ ][a-zñáéíóú ]+[a-zñáéíóú]+$/i
+
+  </script>
+</body>
+
+</html>

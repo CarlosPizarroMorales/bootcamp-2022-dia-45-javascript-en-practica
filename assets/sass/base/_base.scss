@@ -1,0 +1,10 @@
+body {
+  display: grid;
+  place-content: center;
+  height: 100vh;
+
+  background: $toast;
+  color: $white;
+
+  font-family: $font-fira;
+}

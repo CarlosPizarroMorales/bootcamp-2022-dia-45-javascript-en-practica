@@ -1,0 +1,18 @@
+#ejercicio2 {
+  background: $black;
+
+  h2 {
+    text-align: center;
+  }
+
+  h2 + div {
+    background-color: $white;
+  }
+
+  & > div > div {
+    border: 2px solid $white;
+    padding: 1rem 2.5rem 2.5rem;
+    border-radius: 10px;
+  }
+}
+

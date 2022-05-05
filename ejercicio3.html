@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <title>Ejercicio 3</title>
+</head>
+
+<body id="ejercicio3">
+  <div>
+    <div>
+      <h2>Resultado: <span class="resultado"></span></h2>
+      <div id="calculadora">
+        <div>
+          <div>
+            <label for="">Valor 1</label>
+            <input id="valor1" type="text">
+          </div>
+          <div>
+            <label for="">Valor 2</label>
+            <input id="valor2" type="text">
+          </div>
+        </div>
+        <div class="calculadora__buttons">
+          <button id="btn-sumar" type="button">
+            Sumar
+          </button>
+          <button id="btn-restar" type="button">
+            Restar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+
+    /***************************************
+     **           SETUP GENERAL           **
+     ***************************************/
+
+    const sumarBtn = document.querySelector('#btn-sumar');
+    const restarBtn = document.querySelector('#btn-restar');
+    const resultado = document.querySelector('.resultado');
+    
+    [sumarBtn, restarBtn].forEach(e => e.addEventListener('click', valida));
+
+    /***************************************
+     **        FUNCIÓN PARA VALIDAR       **
+     ***************************************/
+
+    function valida(e) {
+      
+      const valor1 = Number(document.querySelector('#valor1').value);
+      const valor2 = Number(document.querySelector('#valor2').value);
+
+      const btn = e.target.getAttribute('id');
+
+      if (/^\d+$/.test(valor1) === false || /^\d+$/.test(valor2) === false) {
+        alert('Solo puede ingresar números enteros.');
+        return; 
+      } else {
+        operar(valor1, valor2, btn);
+      }
+    }
+
+
+    /***************************************
+     **    FUNCIÓN QUE CALCULA Y PINTA    **
+     ***************************************/
+    
+    function operar(valor1, valor2, btn) {
+
+      console.log(valor1, valor2, btn);
+      
+      resultado.innerText = 
+        btn === 'btn-sumar'
+          ? `${valor1 + valor2}`
+          : valor1 < valor2 
+            ? `0`
+            : `${valor1 - valor2}`
+    }
+
+  </script>
+</body>
+
+</html>

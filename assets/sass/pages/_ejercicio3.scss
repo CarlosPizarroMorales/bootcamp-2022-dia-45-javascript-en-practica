@@ -1,0 +1,42 @@
+#ejercicio3 {
+  background-color: $green;
+
+  h2 {
+    margin-bottom: 1rem;
+  }
+  
+  &>div>div {
+    width: clamp(300px, 30vw, 500px);
+  }
+
+  input {
+    height: 2rem;
+    padding-left: .5rem;
+  }
+
+}
+
+#calculadora {
+  display: flex;
+  gap: 1rem;
+}
+
+.calculadora__buttons {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  button {
+    padding: .25rem;
+  }
+}
+
+#btn-sumar {
+  background-color: $red;
+  color: $white;
+}
+
+#btn-restar {
+  background-color: blue;
+  color: $white;
+}
