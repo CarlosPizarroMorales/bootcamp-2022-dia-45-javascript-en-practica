@@ -62,9 +62,8 @@
       let validacionFlag = true;
 
       // LIMPIAR CAMPOS
-      [nombreValor, asuntoValor, mensajeValor].forEach(e => e.value = null); // importante fijarse en actualizar la propiedad correcta de cada elemento
-      [resultado, errorNombre, errorAsunto, errorMensaje].forEach(e => e.innerText = ''); // importante fijarse en actualizar la propiedad correcta de cada elemento
-      // inputs no tienen innerText y parrafos no tienen value
+      [nombreValor, asuntoValor, mensajeValor].forEach(e => e.value = null);
+      [resultado, errorNombre, errorAsunto, errorMensaje].forEach(e => e.innerText = '');
 
 
       // VALIDA REGEX
@@ -84,23 +83,23 @@
 
       // FUNCION UTILITARIA PARA VALIDAR REGEX
       function validaRegex([campoValor, campoString, campoError]) {
+        
         if (!campoValor) {
           campoError.innerText = `El ${campoString} es requerido`;
-          validacionFlag = validacionFlag && false; // error muy interesante si no se aplica esta asignación. No depender ni asumir el estado inicial de un valor. Ser explícito siempre.
+          validacionFlag = validacionFlag && false; 
+
         } else if (/^[^ \d][a-zñáéíóú ]+[a-zñáéíóú]+$/i.test(campoValor)) {
-          validacionFlag = validacionFlag && true; // super ultra interesante, solo si el valor de operar el valor anterior mas el actual es true, entonces flag true. Si se asigna directamente basta que el último valor sea true para satisfacer la validacion del flag.
+          validacionFlag = validacionFlag && true; 
+
         } else {
-          campoError.innerText = `El ${campoString} solo puede contener letras y espacios`;
+          campoError.innerText = `Solo utilizar letras y espacios. No comenzar/terminar con espacio(s)`;
           validacionFlag = validacionFlag && false;
+
         };
+        
         console.log(`Saliendo de validaRegex() para "${campoString}" con validacionFlag = ${validacionFlag}`);
       }
     }
-
-      // para nombre /^[a-z]+[a-z ]+/gi
-      // para el asunto y mensaje /^[a-z]+[a-z .]+/gim
-      // /^[^ ][a-zñáéíóú ]+[a-zñáéíóú]+$/i
-
   </script>
 </body>
 

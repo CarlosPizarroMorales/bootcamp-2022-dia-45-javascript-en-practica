@@ -69,8 +69,8 @@ body {
   background: rgba(56, 30, 10, 0.8);
 }
 #ejercicio1 > :first-child {
-  box-shadow: 0 0 20px rgba(255, 255, 255, 0.9), 0 0 30px rgba(100, 100, 100, 0.7);
   padding: 1.5rem;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.9), 0 0 30px rgba(100, 100, 100, 0.7);
   border-radius: 4px;
 }
 #ejercicio1 h2 {
@@ -114,8 +114,8 @@ body {
   background-color: rgba(255, 255, 255, 0.9);
 }
 #ejercicio2 > div > div {
-  border: 2px solid rgba(255, 255, 255, 0.9);
   padding: 1rem 2.5rem 2.5rem;
+  border: 2px solid rgba(255, 255, 255, 0.9);
   border-radius: 10px;
 }
 
